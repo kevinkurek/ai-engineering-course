@@ -94,7 +94,7 @@ def test_model_outputs(
     custom_deep_eval_model: CustomEvaluationModel,
     test_data_dir: Path,
 ):
-    # Given
+    # Given - LLM output
     system_prompt = (
         "Summarize this transcript in a JSON output with keys 'title' and 'summary'"
     )
@@ -110,16 +110,16 @@ def test_model_outputs(
     )
     output = json.loads(actual_output["choices"][0]["message"]["content"].strip())
 
-    # When
+    # When - Test LLM against expected context
     test_case = LLMTestCase(
         input=short_transcript,
-        actual_output=output["summary"],
-        expected_output="fragmented nature of the supply chain and existing monopolies",
+        actual_output=output["summary"], # actual LLM result
+        expected_output="fragmented nature of the supply chain and existing monopolies", # summary of what we expect to get
         context=[short_transcript],
     )
 
     # Metric 1: Hallucination
-    # uses vectara's hallucination evaluation model
+    # uses vectara's hallucination evaluation model, lower means more hallucination
     hallucination_metric = HallucinationMetric(threshold=0.99)
 
     # Metric 2: Insights

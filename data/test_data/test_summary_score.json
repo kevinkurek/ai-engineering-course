@@ -1,6 +1,6 @@
 {
     "Hallucination": {
-        "score": 0.996757447719574,
+        "score": 0.9963878393173218,
         "details": {
             "alignment": null,
             "inclusion": null,
@@ -12,7 +12,7 @@
         "details": {
             "alignment": null,
             "inclusion": null,
-            "reason": "The summary provides essential information but lacks engaging language and storytelling elements."
+            "reason": "The text provides a straightforward summary of the conversation but lacks entertainment value."
         }
     }
 }
