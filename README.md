@@ -12,7 +12,6 @@ Videos explaining how everything works can be found in the [course on gumroad](h
 - Get mistral model Inside `data` directory
   - `cd data`
   - `wget https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q4_K_M.gguf`
-  - Global tokenizer: AutoTokenizer
   - ![1710117466896](image/README/1710117466896.png)
 
 ## Part 2 Setup
@@ -21,3 +20,14 @@ Videos explaining how everything works can be found in the [course on gumroad](h
 - Ensure you download the file as a .gguf file (see course for details)
 - Save the file to the `data` directory and name it: tinyllama.guff
 - Download the larger model
+
+## Key Commands
+
+* From ` ai-engineering-course` run `PYTHONPATH=. python part_3_rag/rag.py`
+* 
+* Run Evaluations, Hallucinations, and Tests
+  * `PYTHONPATH=. pytest part_4_eval/test_llm.py`
+  * Debug Inside `test_data/test_summary_score.json`
+* Run API Inference
+  * `cd project_api_infernce` `python scripts/together_inference.py`
+    * Stream results will display in the console.

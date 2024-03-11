@@ -101,8 +101,8 @@ def main():
 
     user_prompt = ChatMessage(
         role=MessageRole.USER,
-        # content="According to Dylan Patel, what don't people understand about the semiconductor supply chain?",
-        content="What is Kevin's favorite budgetting software?"
+        content="According to Dylan Patel, what don't people understand about the semiconductor supply chain?",
+        # content="What is Kevin's favorite budgetting software?"
     )
     llm = load_llm(model_path=DATA_DIR / MISTRAL_7B_FILE)
     embedding_model = load_embedding_model()

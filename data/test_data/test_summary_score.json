@@ -8,11 +8,11 @@
         }
     },
     "insights": {
-        "score": 0.6,
+        "score": 0.5,
         "details": {
             "alignment": null,
             "inclusion": null,
-            "reason": "The text provides a straightforward summary of the conversation but lacks entertainment value."
+            "reason": "The text provides a basic summary but lacks any real entertainment factor."
         }
     }
 }
