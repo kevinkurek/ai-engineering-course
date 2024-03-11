@@ -94,7 +94,6 @@ def run_inference(
     query_engine = index.as_query_engine()
     return query_engine.query(messages[1].content)
 
-
 def main():
     configure_logging()
     system_prompt = ChatMessage(role=MessageRole.SYSTEM, content=SYSTEM_PROMPT_TEXT)
