@@ -62,7 +62,10 @@ def run_together_inference_stream(user_prompt: str) -> str:
 
 
 class User(BaseModel):
-    """Defines the schema for a user with name and address fields."""
+    """Defines the schema for a user with name and address fields.
+       
+       Returns a jsonified format automatically
+       """
 
     name: str = Field(..., description="The user's name")
     address: str = Field(..., description="The user's address")
@@ -80,7 +83,7 @@ def run_together_inference_schema(user_prompt: str) -> Dict[str, Any]:
     """
     chat_completion = client.chat.completions.create(
         model="mistralai/Mixtral-8x7B-Instruct-v0.1",
-        response_format={"type": "json_object", "schema": User.schema_json()},
+        response_format={"type": "json_object", "schema": User.model_json_schema()},
         messages=[
             {
                 "role": "system",
@@ -152,7 +155,7 @@ def run_together_inference_tools() -> None:
         },
         {
             "role": "user",
-            "content": "What is the current temperature of New York, San Francisco, and Chicago?",
+            "content": "What is the current temperature of San Francisco?",
         },
     ]
 
@@ -162,18 +165,21 @@ def run_together_inference_tools() -> None:
         tools=tools,
         tool_choice="auto",
     )
+    # print(response)
 
     tool_calls = response.choices[0].message.tool_calls
+    # print(tool_calls)
     if tool_calls:
         for tool_call in tool_calls:
             function_name = tool_call.function.name
             function_args = json.loads(tool_call.function.arguments)
-
+            print(tool_call)
             if function_name == "get_current_weather":
                 function_response = get_current_weather(
                     location=function_args.get("location"),
                     unit=function_args.get("unit", "fahrenheit"),
                 )
+                print(function_response)
                 messages.append(
                     {
                         "tool_call_id": tool_call.id,
@@ -195,5 +201,15 @@ def run_together_inference_tools() -> None:
 
 
 if __name__ == "__main__":
-    for part in run_together_inference_stream(user_prompt="Tell me about Paris"):
-        print(part, end="", flush=True)
+
+    # Test streaming generator function
+    # for part in run_together_inference_stream(user_prompt="Tell me about Paris"):
+    #     print(part, end="", flush=True)
+
+    # Test Pydantic schema forcing output
+    # result = run_together_inference_schema(user_prompt='')
+    # print(result)
+
+    # Test adding external tools to LLM content
+    result = run_together_inference_tools()
+    # print(result)
